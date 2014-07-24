@@ -47,3 +47,28 @@ Guiding Principles-:
 	depends on architecture, compiler etc. We lose very little in terms of predictive power.
 	3. Asymptotic analysis -: Focus on running time of large inputs 
 
+Part Ib
+=========================================================================================================================
+
+Why asymptotic analysis -:
+	1. Coarse enough to supress architecture, programming language and system-dependent details.
+	2. Sharp enough to make useful comparisons between different algorithms, for large input sizes. 
+	3. Lower order terms become increasingly irrelevant as the input size increases.
+	4. Constant factors are highly dependent on system.
+
+Big O notation -: 
+	1. A function T(n) is defined for all positive integers
+	2. T(n) = O(f(n)) iff there exists positive constants C and n_0 such that T(n) <= C * f(n) for all n >= n_0
+
+Big Omega notation -: 
+	1. T(n) = Omega(f(n)) iff there exists positive constants C and n_0 such that T(n) >= C * f(n) for all n >= n_0. So it 
+	stands for lower bound, unlike the Big O which stands for the upper bound. 
+
+Theta notation -: 
+	1. It is for equals
+	2. A functon T(n) = Theta(f(n)) iff T(n) = O(f(n)) and T(n) = Omega(f(n))
+	3. This can be proved if we can find two constants C_0 and C_1 such that -: C_o * f(n) <= T(n) <= C_1 * f(n) 
+	
+
+Little o notation -: 
+	1. T(n) = o(f(n)) iff for all constants C > 0; T(n) <= C * f(n) for all n >= n_0  
