@@ -72,3 +72,13 @@ Theta notation -:
 
 Little o notation -: 
 	1. T(n) = o(f(n)) iff for all constants C > 0; T(n) <= C * f(n) for all n >= n_0  
+
+Part Ic
+================================================================================================================================
+
+Inversion -: 
+	1. Measures how far (or close) the array is from being sorted. If array is already sorted then inversion count is 0. If array is 
+	sorted in reverse order that inversion count is the maximum.
+	2. Divide and conquer method of counting inversions in a list uses merge sort method. The input list is divided into halves
+	and inversions are counted for them recursively. Then split inversions is counted between the two halves of the list. 
+	By adding them up, total inversions are counted.  
