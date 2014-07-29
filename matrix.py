@@ -1,10 +1,19 @@
+"""
+Implementation of basic matrix operation in python. Matrix product is implemented
+using both Gaussian and Strassen's Algorithm. 
+
+The Strassen's code works only for matrices of even size. That can be resolved by converting 
+odd size matrix into even size which can be done easily and it is what we call "Gadha Mazdoori" in which I am 
+not interested :P 
+"""
 def add_matrices(M1, M2):
     """
     input: M1 and M2 are matrics of same dimension
     output: matrix of the same dimension as M1 and M2
+    
     assumption: M1 + M2 is defined
     
-    returns matrix addition of the input matrices
+    returns matrix addition of the input matrices (M1 + M2)
     """
     #get row and col of input matrices
     row = len(M1)
@@ -18,14 +27,15 @@ def add_matrices(M1, M2):
 
     return ans 
 
+
 def subtract_matrices(M1, M2):
     """
     input: M1 and M2 are matrics of same dimension
     output: matrix of the same dimension as M1 and M2
-    assumption: M1 + M2 is defined
     
-    returns matrix subtraction of the input matrices;
-    M1 - M2
+    assumption: M1 - M2 is defined
+    
+    returns matrix subtraction of the input matrices (M1 - M2)
     """
     #get row and col of input matrices
     row = len(M1)
@@ -39,10 +49,12 @@ def subtract_matrices(M1, M2):
 
     return ans 
 
+
 def product_matrices(M1, M2):
     """
     input: m1(matrix mxn) ; m2(matrix nxp)
     output: matrix (mxp)
+    
     assumption: matrix multiplication of input matrices
     is defined
     
@@ -65,6 +77,7 @@ def product_matrices(M1, M2):
             ans[i][j] = scal_product                
     
     return ans
+
 
 def merge_matrices(A, B, C, D):
     """
@@ -105,16 +118,6 @@ def merge_matrices(A, B, C, D):
 
     return ans        
 
-def split_list(L, n):
-    """
-    input: L is a list and n is an integer
-    output: a tuple of two lists
-
-    splits the list into two parts. First part is of length n
-    """
-    return L[:n], L[n:]
-
-#print split_list([1,2,3,4,5,6], 3)
 
 def split_matrix(X):
     """
@@ -140,21 +143,60 @@ def split_matrix(X):
             C.append(X[i][:col_a])
             D.append(X[i][col_a:])
 
-    print "A:", A
-    print "B:", B
-    print "C:", C
-    print "D:", D
-
     return A, B, C, D    
+
+def product_strassen(X, Y):
+    """
+    input: X(matrix mxn) ; Y(matrix nxp)
+    output: matrix (mxp)
+    
+    assumption: matrix multiplication of input matrices
+    is defined. 
+    
+    ** X and Y are matrices of even and equal dimensions.
+    
+    returns matrix product of two input matrices using Gaussian 
+    algorithm
+    """
+    if len(X) and len(Y) <= 2:
+        return product_matrices(X, Y)
+    else:
+        #get components of input matrices
+        A, B, C, D = split_matrix(X)
+        E, F, G, H = split_matrix(Y)
+        
+        #get seven products
+        p1 = product_strassen(A, subtract_matrices(F, H))
+        p2 = product_strassen(add_matrices(A,B), H)
+        p3 = product_strassen(add_matrices(C,D), E)
+        p4 = product_strassen(D, subtract_matrices(G,E))
+        p5 = product_strassen(add_matrices(A,D),add_matrices(E,H))
+        p6 = product_strassen(subtract_matrices(B,D),add_matrices(G,H))
+        p7 = product_strassen(subtract_matrices(A,C),add_matrices(E,F))
+        
+        #get four submatrices of input matrix
+        x1 = add_matrices(p5,p4)
+        x2 = add_matrices(x1, p6)
+        S1 = subtract_matrices(x2, p2) #first sub-matrix ; p4+p5+p6-p2
+        S2 = add_matrices(p1,p2) #second element
+        S3 = add_matrices(p3,p4) #third element
+        y1 = add_matrices(p1,p5)
+        y2 = subtract_matrices(y1, p3)
+        S4 = subtract_matrices(y2, p7)
+        
+        return merge_matrices(S1, S2, S3, S4)
+        
+        
+    
 
 
 m3 = [[1,2,3], [3,2,1], [2,1,3]] # 3 x 3
 m4 = [[4,5,6], [6,5,4], [4,6,5]] # 3 x 3
 m5 = [[101,102,103], [103,104,105], [105, 106, 107]] # 3 x 3
 m6 = [[201,202,203], [204,205,206], [207,208,209]] # 3 x 3
-m7 = [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]
+m7 = [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]] # 4 x 4
+m8 = [[11,12,13,14], [15,16,17,18], [19,110,111,112], [113,114,115,116]]
 
-print split_matrix(m7)
-
-
+print product_matrices(m7, m8)
+print product_strassen(m7, m8)
 
