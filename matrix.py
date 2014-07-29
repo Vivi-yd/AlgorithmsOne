@@ -155,7 +155,7 @@ def product_strassen(X, Y):
     
     ** X and Y are matrices of even and equal dimensions.
     
-    returns matrix product of two input matrices using Gaussian 
+    returns matrix product of two input matrices using Strassen's 
     algorithm
     """
     if len(X) and len(Y) <= 2:
