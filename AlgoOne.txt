@@ -82,3 +82,27 @@ Inversion -:
 	2. Divide and conquer method of counting inversions in a list uses merge sort method. The input list is divided into halves
 	and inversions are counted for them recursively. Then split inversions is counted between the two halves of the list. 
 	By adding them up, total inversions are counted.  
+
+
+Part IIa
+================================================================================================================================
+
+Master method (slides*)-:
+	1. Holds for recursive algorithm. Gives a general upper bound on running time.
+	2. Basic assumption -: All the sub-problems in the recursive call have equal size.
+
+
+Part IIb
+================================================================================================================================
+
+Quick sort(slides*) -: 
+	1. Prevalent in practice. Its better than merge sort in terms of memory as very minimal extra memory is needed for it. Its 
+	run time is O(n logn) on average. 
+	2. The key idea is to partition array around a pivot element. Rearrange the array so that all the elements which are less
+	than the element are on its left and all elements which are greater are to the right. The rearragement puts the pivot 
+	element at its rightful place. 
+	3. The left and the right parts around the pivot elements are sorted recursively.
+
+Partition sub-routine -:
+	1. 
+
