@@ -3,7 +3,7 @@ from random import randrange
 
 def split(x, m):
     """
-    returns a tuple of quotient and integer of x as divided
+    returns a tuple of quotient and remainder of x as divided
     by 10**m
     """
     return x // 10**m , x % 10**m
@@ -17,7 +17,7 @@ def karatsuba(x, y):
     if x < 10 or y < 10:
         return x*y
     
-    #get value of m (base for 10)
+    #get value of m (base 10)
     n = max(len(str(x)), len(str(y)))
     m = int(ceil(n/2.0))
     
