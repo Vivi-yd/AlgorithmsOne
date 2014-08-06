@@ -1,8 +1,21 @@
+from random import randrange
+
+def is_sorted(L):
+    """
+    returns True if the list is sorted in ascending order.
+    False otherwise.
+    """
+    for i in range(1, len(L)):
+        if L[i] < L[i-1]:
+            return False
+
+    return True            
+
+
 def merge(L1, L2):
     """
     input: L1 and L2 are lists (sorted)
     output: List
-    
     merges two lists and returns a sorted List
     """
     merged = []
@@ -38,24 +51,24 @@ def merge_sort(L):
         
         return merge(L1, L2)
 
-def test_merge_sort():
-    test = [[8, 7, 6, 6, 1, 5, 4, 2, 3, 1], [2], 
-            [1, 2, 3, 4], [8, 9, 8, 9, 8, 1, 7, 6]]
-    expected = [[1, 1,  2, 3, 4, 5, 6, 6, 7, 8], [2],
-                [1, 2, 3, 4], [1, 6, 7, 8, 8, 8, 9, 9]]
-    
-    for idx in range(len(test)):
-        failed = 0
-        if merge_sort(test[idx]) != expected[idx]:
+def test_sorting():
+    """
+    test for merge sort using randomly created list
+    """
+    failed = 0
+    #testing for 100 random cases
+    for i in range(100):
+        #create random list
+        length = randrange(1, 21)
+        lst = [randrange(1, 10) for i in range(length)]
+        #lists created by algorithm and python internal implementation
+        lst1 = merge_sort(lst)
+        if not(is_sorted(lst1)):
             failed += 1
-            print "test failed for:", test[idx]
-            print "computed:", merge_sort(test[idx])
-            print "expected:", expected[idx]
-            print "--------------------------------"
-            
+            print "test failed for:" , lst
+            print "computed:", lst1
+    
     if failed == 0:
-        print "merge_sort: tests passed"
-    else:
-        print "test failed: review code"
+        print "test passed for merge sort" 
 
-test_merge_sort()        
+test_sorting()    
