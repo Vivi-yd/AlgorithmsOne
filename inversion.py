@@ -115,7 +115,7 @@ def inversion_and_sort(lst):
         #x, y are counts of inversions within the two halves
         lst_left, x = inversion_and_sort(lst[:len(lst)/2])
         lst_right, y = inversion_and_sort(lst[len(lst)/2: ])
-        #z is the count of split inversion between the the two halves
+        #z is the count of split inversion between the two halves
         result_lst, z = merge_and_count(lst_left, lst_right)
         
         return result_lst, x+y+z
