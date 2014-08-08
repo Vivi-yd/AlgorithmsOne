@@ -16,32 +16,6 @@ def inversion_brute(lst):
 
     return count_inversion
 
-def test_inversion():
-    """
-    test method for inversion using f method
-    """
-    f = inversion_brute
-    failed = 0
-    
-    test = [[], [1], [1, 2, 3, 4, 5, 6], [6, 5, 4, 3, 2, 1],
-            [1, 3, 5, 2, 4, 6]]
-    expected = [0, 0, 0, 15, 3]
-    
-    for idx in range(len(test)):
-        #test for each list one by one
-        if f(test[idx]) != expected[idx]:
-            failed += 1
-            print "test failed for:" , test[idx]
-            print "computed:", f(test[idx]) 
-            print "expected:", expected[idx]
-            print "---------------------------"
-
-    if failed == 0:
-        print "inversion_brute: tests passed"
-    else:
-        print str(f), "tests failed; review code"
-
-test_inversion()
 
 def merge_and_count(L1, L2):
     """
@@ -49,7 +23,7 @@ def merge_and_count(L1, L2):
     output: tuple of a list and an integer
     
     returns a merged list which is sorted in ascending order
-    and number of split inversions with respect tp two elements
+    and number of split inversions with respect to two elements
     """
     #indices for both lists
     idx = 0 #for L1
@@ -172,5 +146,3 @@ def test_inversion_and_sort():
         print "inversion_and_sort: tests failed; review code"
     
 test_inversion_and_sort()    
-
-
